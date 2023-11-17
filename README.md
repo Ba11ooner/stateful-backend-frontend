@@ -1,57 +1,50 @@
-# Ant Design Pro
+# stateful-backend-frontend
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+### 前言
 
-## Environment Prepare
+学习程序员鱼皮API 开放平台项目开源项目：https://github.com/liyupi/yuapi-backend-public
 
-Install `node_modules`:
+通过开源项目中给出的前端技术栈，倒推 stateful-backend 的前端实现
 
-```bash
-npm install
-```
+#### 前端技术选型
 
-or
+- React 18
+- Ant Design Pro 5.x 脚手架
+- Ant Design & Procomponents 组件库
+- Umi 4 前端框架
+- OpenAPI 前端代码生成
 
-```bash
-yarn
-```
+### 项目介绍
+本项目为开放平台项目中的 backend 子模块的前端部分
 
-## Provided Scripts
+可以作为可复用的中后台基础前端项目，用于具体业务的二次开发
 
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+#### 用户中心
 
-Scripts provided in `package.json`. It's safe to modify or add additional script:
+##### 功能介绍
 
-### Start project
+给出了带有用户态信息记录的，对齐 stateful-backend 后端项目中用户中心部分的前端代码
 
-```bash
-npm start
-```
+#### 标准 CRUD
 
-### Build project
+##### 功能介绍
 
-```bash
-npm run build
-```
+提供了一套标准的 CRUD 前端解决方案
 
-### Check code style
 
-```bash
-npm run lint
-```
+#### 机制汇总
 
-You can also use script to auto fix some lint error:
+- 机制整理 
+  - 可复用 CRUD 机制
+ 
+#### 解决方案汇总
 
-```bash
-npm run lint:fix
-```
+- 解决方案整理
+    - 接口方法生成解决方案
+    - 分页解决方案
+    - Mock 解決方案
+    - 用户态存储 → 页面访问逻辑控制 解决方案
+ 
+### 总结文档
 
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+https://www.cnblogs.com/ba11ooner/p/17666383.html
