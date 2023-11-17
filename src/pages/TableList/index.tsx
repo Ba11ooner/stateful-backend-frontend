@@ -1,4 +1,8 @@
-//TODO 修改引入的方法
+//TODO
+// 1.全局修改
+//   Sample → Entity
+//   sample → entity
+// 2.配置 CRUD 方法
 import {
   addSampleUsingPOST as add,
   updateSampleUsingPOST as update,
@@ -29,11 +33,11 @@ const handleAdd = async (fields: API.SampleAddRequest) => {
       ...fields,
     });
     hide();
-    message.success('新建样例成功');
+    message.success('新建成功');
     return true;
   } catch (error) {
     hide();
-    message.error('新建样例失败，请重试');
+    message.error('新建失败，请重试');
     return false;
   }
 };
@@ -101,12 +105,10 @@ const TableList: React.FC = () => {
   const actionRef = useRef<ActionType>();
 
   //行选取状态控制
-  //TODO 修改页面元素类型
   const [currentRow, setCurrentRow] = useState<API.SampleVO>();
   const [selectedRowsState, setSelectedRows] = useState<API.SampleVO[]>([]);
 
-  //例属性配置
-  //TODO 配置表格列属性
+  //TODO 3.配置查询结果表格属性
   const columns: ProColumns<API.SampleVO>[] = [
     {
       title: 'Sample',
@@ -169,20 +171,19 @@ const TableList: React.FC = () => {
     },
   ];
 
-
   // @ts-ignore
   return (
     <PageContainer>
-      {/* 查询结果表格 */}
+      {/* region 查询结果表格 */}
       <ProTable
-        //TODO 更改列表元素类型 改第一个就行
         <API.SampleVO, API.PageParams>
 
         //基础配置
         headerTitle={'查询表格'}
         actionRef={actionRef}
         rowKey="id"
-        search={{labelWidth: 120,}}
+        search={false}
+        options={false}
 
         //工具栏渲染器
         toolBarRender={() => [
@@ -214,8 +215,9 @@ const TableList: React.FC = () => {
           },
         }}
       />
+      {/*endregion*/}
 
-      {/*批量删除工具栏*/}
+      {/*region 批量删除工具栏*/}
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
@@ -237,8 +239,9 @@ const TableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
+      {/*endregion*/}
 
-      {/* add 表单 */}
+      {/*region add 表单 */}
       <ModalForm
         //基础配置
         title={'新建 Sample'}
@@ -250,7 +253,6 @@ const TableList: React.FC = () => {
 
         //确定按钮事件绑定
         onFinish={async (value) => {
-          //TODO：更改 handleAdd 方法的参数类型
           const success = await handleAdd(value as API.SampleAddRequest);
           if (success) {
             handleModalVisible(false);
@@ -262,16 +264,17 @@ const TableList: React.FC = () => {
 
         }
       >
+        {/*TODO 4.配置 add 表单属性*/}
         <ProFormText
-          placeholder='请输入 id'
+          placeholder='id 自动生成'
           rules={[
             {
-              required: true,
-              message: 'id 为必填项',
+              required: false,
             },
           ]}
           width="md"
           name="id"
+          disabled={true}
         />
         <ProFormText
           placeholder='请输入样例文本'
@@ -295,8 +298,9 @@ const TableList: React.FC = () => {
           name="sampleStatus"
         />
       </ModalForm>
+      {/*endregion*/}
 
-      {/* update 表单 */}
+      {/*region update 表单 */}
       <ModalForm
         //基础配置
         title={'更新 Sample'}
@@ -310,7 +314,6 @@ const TableList: React.FC = () => {
         //确定按钮事件绑定
         onFinish={async (value) => {
           console.log(value)
-          //TODO：更改 handleUpdate 方法的参数类型
           const success = await handleUpdate(value as API.SampleUpdateRequest);
           if (success) {
             handleModalVisible(false);
@@ -323,6 +326,7 @@ const TableList: React.FC = () => {
         }
         }
       >
+        {/*TODO 5. 配置 update 表单属性*/}
         <ProFormText
           initialValue={currentRow?.id}
           width="md"
@@ -352,8 +356,9 @@ const TableList: React.FC = () => {
           name="sampleStatus"
         />
       </ModalForm>
+      {/*endregion*/}
 
-      {/*抽屉*/}
+      {/*region 抽屉*/}
       <Drawer
         width={600}
         visible={showDetail}
@@ -370,6 +375,7 @@ const TableList: React.FC = () => {
           bordered={true}
           size={"default"}
           title="样例"
+          // TODO 6.配置抽屉属性
           dataSource={
             {
               id: currentRow?.id,
@@ -396,6 +402,7 @@ const TableList: React.FC = () => {
           ]}
         />
       </Drawer>
+    {/*endregion*/}
     </PageContainer>
   );
 };

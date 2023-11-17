@@ -1,3 +1,4 @@
+//TODO 配置登出方法
 import {userLogoutUsingGET as outLogin} from "@/services/stateful-backend/userController";
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';

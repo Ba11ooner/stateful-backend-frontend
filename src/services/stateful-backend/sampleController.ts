@@ -1,8 +1,9 @@
 // @ts-ignore
 /* eslint-disable */
 import {request} from 'umi';
-// const local: string = "";
-const local: string = "http://localhost:8080";
+import {getUrl} from "@/services/url";
+
+const local: string = getUrl();
 
 /** addSample POST /sample/add */
 export async function addSampleUsingPOST(
